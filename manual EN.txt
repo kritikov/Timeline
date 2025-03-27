@@ -1,0 +1,148 @@
+﻿Timeline - View events in chronological order
+
+version 1.0.0
+
+General
+
+Timeline is a JavaScript class that allows the creation and display of events in the browser. The main component is the timelines in which the events 
+belonging to each of them are placed. The timelines are placed sequentially, and the events they contain are placed either above the timeline line or below. 
+There is also the periods line that is placed at the top of the graph, and in which each period spreads over a number of consecutive timelines showing that 
+they belong to the same period.
+
+
+Usage
+
+The Timeline includes two files, one in javascript and one in css. The javascript includes the Timeline class and its use is done by declaring an
+instance, passing as a parameter the div in which the editor or viewer will be created. The class uses the tl- prefix to declare the various
+css classes included in the corresponding file.
+
+
+Creating an instance
+
+To use the Timeline we create an instance of the Timeline class:
+
+var timeline = new Timeline(options);
+
+where options includes the following properties:
+
+	element: the div that will be used to display the editor (required)
+
+
+Timeline Public Methods
+
+draw(): displays the timeline in the browser (or refreshes it).
+
+setUpperTitle(title): modifies the general title of events above the timelines
+
+setLowerTitle(title): modifies the general title of events below the timelines
+
+addMilestone(milestone): adds a new milestone to the chart. The milestone is of the form:
+
+	milestone = {
+		title: "<value>",
+		events: [
+			{
+				text: "<value>",
+				place: "<value>",
+				distance: <value>
+				customClass: "<value>",
+				details: {
+					title: "<value>",
+					text: '<value>',
+				}
+			}
+		],
+		period: {
+			text: "<value>, 
+			milestones: <value> 
+		}
+	}
+
+	where:
+
+	title: the text that appears in the timeline.
+	events: the list of events contained within the timeline. Each timeline can contain an unlimited number of events and its length will be adjusted accordingly.
+		text: the text of the event.
+		place: whether the event appears above or below the timeline line (allowed values ​​'up' or 'down')
+		distance: is optional and concerns the distance in pixels of the event from the timeline. If no value is given then it will be at the default distance defined by the css.
+		customClass: a custom class by the user to give more css formatting to the specific event
+		details: is optional. If a value is given then clicking on the event will open a popup that will display the information it contains
+			title: the title within the detail
+			text: the text that will appear in the popup (can be plain text or html for more complex presentations).
+		period: is optional. If a value is given, then a wider period begins at the given timeline that can include many consecutive timelines. The period is displayed as a line at the top of the graph.
+			text: the text displayed in the period
+			milestones: the number of milestones that the period will extend over (including the current milestone)
+
+
+Usage example
+
+	var timelineElem = document.getElementById("timeline");
+	var timeline = new Timeline({ element: timelineElem });
+
+	timeline.setUpperTitle("about professional");
+	timeline.setLowerTitle("about creativity");
+
+	timeline.addMilestone({
+		title: "1973",
+		events: [
+			{
+				text: "birth", 
+				place: "up", 
+			},
+		]
+	});
+	timeline.addMilestone({
+		title: "1985 - 1988",
+		events: [
+			{ 
+				text: "3th Corinth Gymnasium", 
+				place: "up", 
+				customClass: "event-school",
+			},
+		],
+		period: { text: "school years", milestones: 2 }
+	});
+	timeline.addMilestone({
+		title: "1988 - 1991",
+		events: [
+			{ 
+				text: "1st Lyceum of Corinth", 
+				place: "up", 
+				distance: 60 
+			},
+			{
+				text: "Writing stories", 
+				place: "down",
+				details: {
+					title: "1990, 17 years old",
+					text: 'Somewhere in Lyceum, in the second or third grade, he started writing some stories on paper',
+				}
+			},
+		]
+	});
+	timeline.addMilestone({
+		title: "1993",
+		events: [
+			{
+				text: "Introduction to military School of Evelpidon. He leaves the same year.", 
+				place: "up", 
+				distance: 120,
+				details: {
+					title: "1993, 19 years old",
+					text: '<p>In the Panhellenics examinations he declared only the school of Evelpides because of the free studies it provided. He succeeded on the third try. However, after some time in the school, he realized that it was not for him.</p><div class="timeline-gallery"><figure><img id="timeline-image2" src="../Client/Images/Standard/Timeline/Evelpidon2.jpg?ver=1" class="viewable" alt="Nick Kritikou at Evelpidon School"><figcaption>Parents and sister, happy for the son who entered in the military school of Evelpidon (the son is sleeping).</figcaption></figure><figure><img id="timeline-image3" src="../Client/Images/Standard/Timeline/Evelpidon1.jpg?ver=1" class="viewable" alt="Nick Kritikou at Evelpidon School"><figcaption>The son. Not so happy he entered the military school of Evelpidon</figcaption></figure></div>',
+				}
+			},
+			{
+				text: "First contact with programming and QBASIC. Trying to make the game TAIPAN on MSX.", 
+				place: "down",
+				details: {
+					title: "1993, 20 years old",
+					text: '<p>Back then he had borrowed a friend`s Amstrad 464 and one of the games he was addicted to was TAIPAN.Wandering from island to island, you traded, fought, got rich and all that.Travels from nothing, what more do you need?</p><p>When he later had to return the Amstrad, he couldn`t find a version of the game for his MSX. He decided to her make it yourself. No pictures, just letters, as he was completely inexperienced with them. Of course, with MSX`s built-in QBASIC, displaying letters would be a problem too.</p><p>This, however, was his first serious contact with programming.</p><div class="timeline-gallery"><figure><img src="../Client/Images/Standard/Timeline/Taipan.jpg?ver=1" class="viewable" alt="TAIPAN"><figcaption>The TAIPAN in Amstrad. You dont want to see the version in MSX.</figcaption></figure></div>',
+				}
+			},
+		]
+	});
+
+	timeline.draw();
+
+

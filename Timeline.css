@@ -1,0 +1,199 @@
+
+.tl-canvas {
+    min-width: 90%;
+    background-image: linear-gradient(#EBEEF1, #C7CED6);
+    border: 1px solid #C66300;
+    overflow: auto;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.tl-contents {
+    border-collapse: collapse;
+    width: auto;
+    table-layout: fixed;
+}
+
+
+/**************** periods ****************/
+
+.tl-period > div {
+    text-align: center;
+    border-bottom: 1px solid #008040;
+    color: #373D4D;
+    padding: 5px;
+    margin: 5px 10px 25px 10px;
+}
+
+
+/**************** milestones ****************/
+
+.tl-milestone {
+    background-color: #57728F;
+    text-align: center;
+    color: white;
+    border-left: 1px solid white;
+    padding: 5px 25px 5px 25px;
+    min-width: 100px;
+}
+.tl-milestones > td:nth-child(even) .tl-milestone {
+    background-color: #7E93A9;
+}
+
+
+/**************** titles ****************/
+
+.tl-upperTitle {
+    color: #BB0000;
+    text-shadow: 5px 5px 10px gray;
+    word-wrap: break-word;
+    white-space: normal;
+    font-size: 20px;
+    vertical-align: bottom;
+}
+.tl-upperTitle>div{
+    width: 180px;
+    text-align: right;
+    padding: 0 40px 40px 0;
+}
+.tl-lowerTitle {
+    color: #BB0000;
+    text-shadow: 5px 5px 10px gray;
+    word-wrap: break-word;
+    white-space: normal;
+    font-size: 20px;
+    vertical-align: top;
+}
+.tl-lowerTitle>div {
+    width: 180px;
+    text-align: right;
+    padding: 40px 40px 0 0;
+}
+
+
+/**************** upper/lower events ****************/
+
+.tl-upperEvents,
+.tl-lowerEvents {
+    text-align: center;
+    white-space: nowrap;
+    overflow: visible;
+    width: max-content;
+    margin: 0 auto;
+}
+.tl-upperEvent,
+.tl-lowerEvent {
+    display: inline-block;
+    text-align: center;
+    margin: 0 10px 0 10px;
+}
+.tl-upperEvent {
+    vertical-align: bottom;
+}
+.tl-lowerEvent {
+    vertical-align: top;
+}
+
+
+/**************** events ****************/
+
+.tl-event {
+    padding: 5px 10px 5px 10px;
+    background-color: #F4F4F4;
+    color: black;
+    text-align: left;
+    border: 1px solid #8B8B8B;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #4A4A4A;
+    word-wrap: normal;
+    white-space: normal;
+    line-height: 1.3em;
+    transition: 0.2s;
+    max-width: 150px;
+}
+.tl-event-withDetails {
+    cursor: pointer;
+    background-color: #FAFFEC;
+}
+.tl-event-withDetails:hover {
+    background-color: #FFCD9B;
+}
+.tl-event-details-title {
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.tl-event-details-text p {
+    padding: 5px;
+}
+
+
+/**************** connection lines ****************/
+
+.tl-eventConnectionLine {
+    width: 1px;
+    height: 40px;
+    padding: 0;
+    border-left: 1px solid #C66300;
+    display: inline-block;
+}
+
+
+/**************** details viewer ****************/
+
+.tl-detailsViewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 98;
+}
+.tl-detailsViewer-block {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+}
+.tl-detailsViewer-buttons {
+    text-align: right;
+}
+.tl-detailsViewer-buttons-close {
+    cursor: pointer;
+    font-size: 50px;
+    padding: 4px;
+    font-weight: bold;
+    color: cadetblue;
+}
+.tl-detailsViewer-contents {
+    position: fixed;
+    z-index: 100;
+    min-width: 50%;
+    max-width: 95%;
+    max-height: 95%;
+    background-color: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+    background-image: linear-gradient(to bottom, #F2F4F7, #E0E4E9);
+    border: 1px solid #FF0000;
+    margin-bottom: 15px;
+    line-height: 1.4em;
+    padding: 10px 20px 30px 20px;
+}
+
+
+/**************** various classes ****************/
+
+.tl-hidden {
+    display: none;
+}
+
+
+
+
+
+
+
+

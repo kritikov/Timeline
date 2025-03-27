@@ -1,0 +1,148 @@
+Timeline - Προβολή γεγονότων σε χρονική σειρά
+
+version 1.0.0
+
+Γενικά
+
+Η Timeline είναι μία κλάση JavaScript που επιτρέπει την δημιουργία και προβολή γεγονότων στον browser. Το κύριο συστατικό είναι τα timelines μέσα στα οποία 
+τοποθετούνται τα events που ανήκουν στο καθένα από αυτά. Τα timelines τοποθετούνται διαδοχικά, και τα events που περιέχουν τοποθετούνται είτε 
+επάνω από την γραμμή των timelines είτε από κάτω. Υπάρχει επίσης η γραμμή των periods που τοποθετείται στην κορυφή του γραφήματος, και στην οποία κάθε period 
+απλώνεται πάνω από ένα αριθμό διαδοχικών timelines δείχνοντας ότι ανήκουν στην ίδια περίοδο.
+
+
+Χρήση
+
+Η Timeline περιλαμβάνει δύο αρχεία, ένα σε javascript και ένα σε css. Η javascript περιλαμβάνει την κλάση Timeline και η χρήση της γίνεται με την δήλωση ενός 
+instance, περνώντας παραμετρικά το div στο οποίο θα δημιουργηθεί ο editor ή o viewer. Η κλάση χρησιμοποιεί το πρόθεμα tl- για να δηλώσει τις διάφορες κλάσεις 
+css που περιλαμβάνονται στο αντίστοιχο αρχείο. 
+
+
+Δημιουργία instance
+
+Για να χρησιμοποιήσουμε την Timeline δημιουργούμε ένα instance της κλάσης Timeline:
+
+var timeline = new Timeline(options);
+
+όπου η options περιλαμβάνει τα παρακάτω properties:
+
+	element: το div που θα χρησιμοποιηθεί για να εμφανιστεί ο editor (υποχρεωτικό)
+
+
+Δημόσιες Μέθοδοι της Timeline
+
+draw(): εμφανίζει στον browser το timeline (ή κάνει refresh). 
+
+setUpperTitle(title): τροποποιεί τον γενικό τίτλο των event που βρίσκονται επάνω από τα timelines
+
+setLowerTitle(title): τροποποιεί τον γενικό τίτλο των event που βρίσκονται κάτω από τα timelines
+
+addMilestone(milestone): προσθέτει ένα καινούργιο milestone στο γράφημα. Το milestone είναι της μορφής:
+
+	milestone = {
+		title: "<value>",
+		events: [
+			{
+				text: "<value>", 
+				place: "<value>",
+				distance: <value>
+				customClass: "<value>",
+				details: {
+					title: "<value>",
+					text: '<value>',
+				}
+			}
+		],
+		period: {
+			text: "<value>, 
+			milestones: <value> 
+		}
+	}
+
+	όπου:
+
+	title: το κείμενο που εμφανίζεται μέσα στο timeline. 
+	events: η λίστα με τα events που περιέχονται μέσα στο timeline. Κάθε timeline μπορεί να περιέχει απεριόριστα events και το μήκος του θα προσαρμοστεί αναλόγως.
+		text: το κείμενο του event. 
+		place: αν το event εμφανιστεί επάνω ή κάτω από την γραμμή των timelines (επιτρεπόμενες τιμές 'up' ή 'down') 
+		distance: είναι προαιρετικό και αφορά την απόσταση σε pixels του event από το timeline. Αν δεν δοθεί τιμή τότε θα απέχει την default απόσταση που ορίζεται από την css.
+		customClass: μια custom class από τον χρήστη ώστε να δοθούν περισσότερες μορφοποιήσεις css στο συγκεκριμένο event
+		details: είναι προαιρετικό. Αν δοθεί τιμή τότε κάνοντας κλικ στο event θα ανοίξει ένα popup που θα εμφανίσει τις πληροφορίες που περιέχει
+			title: ο τίτλος μέσα στο detail
+			text: το κείμενο που θα εμφανιστεί στο popup (μπορεί να είναι απλό text ή html για πιο πολύπλοκες παρουσιάσεις).
+	period: είναι προαιρετικό. Αν δοθεί τιμή τότε στο συγκεκριμένο timeline ξεκινά μια ευρύτερη περίοδος που μπορεί να περιλαμβάνει πολλά διαδοχικά timelines. Η περίοδος εμφανίζεται σαν γραμμή στο επάνω μέρος του γραφήματος.
+		text: το κείμενο που εμφανίζεται στην περίοδο
+		milestones: ο αριθμός των milestones που θα επεκταθεί η περίοδος (συμπεριλαμβάνοντας και το τρέχων milestone)
+
+
+Παράδειγμα χρήσης
+
+	var timelineElem = document.getElementById("timeline");
+	var timeline = new Timeline({ element: timelineElem });
+
+	timeline.setUpperTitle("about professional");
+	timeline.setLowerTitle("about creativity");
+
+	timeline.addMilestone({
+		title: "1973",
+		events: [
+			{
+				text: "birth", 
+				place: "up", 
+			},
+		]
+	});
+	timeline.addMilestone({
+		title: "1985 - 1988",
+		events: [
+			{ 
+				text: "3th Corinth Gymnasium", 
+				place: "up", 
+				customClass: "event-school",
+			},
+		],
+		period: { text: "school years", milestones: 2 }
+	});
+	timeline.addMilestone({
+		title: "1988 - 1991",
+		events: [
+			{ 
+				text: "1st Lyceum of Corinth", 
+				place: "up", 
+				distance: 60 
+			},
+			{
+				text: "Writing stories", 
+				place: "down",
+				details: {
+					title: "1990, 17 years old",
+					text: 'Somewhere in Lyceum, in the second or third grade, he started writing some stories on paper',
+				}
+			},
+		]
+	});
+	timeline.addMilestone({
+		title: "1993",
+		events: [
+			{
+				text: "Introduction to military School of Evelpidon. He leaves the same year.", 
+				place: "up", 
+				distance: 120,
+				details: {
+					title: "1993, 19 years old",
+					text: '<p>In the Panhellenics examinations he declared only the school of Evelpides because of the free studies it provided. He succeeded on the third try. However, after some time in the school, he realized that it was not for him.</p><div class="timeline-gallery"><figure><img id="timeline-image2" src="../Client/Images/Standard/Timeline/Evelpidon2.jpg?ver=1" class="viewable" alt="Nick Kritikou at Evelpidon School"><figcaption>Parents and sister, happy for the son who entered in the military school of Evelpidon (the son is sleeping).</figcaption></figure><figure><img id="timeline-image3" src="../Client/Images/Standard/Timeline/Evelpidon1.jpg?ver=1" class="viewable" alt="Nick Kritikou at Evelpidon School"><figcaption>The son. Not so happy he entered the military school of Evelpidon</figcaption></figure></div>',
+				}
+			},
+			{
+				text: "First contact with programming and QBASIC. Trying to make the game TAIPAN on MSX.", 
+				place: "down",
+				details: {
+					title: "1993, 20 years old",
+					text: '<p>Back then he had borrowed a friend`s Amstrad 464 and one of the games he was addicted to was TAIPAN.Wandering from island to island, you traded, fought, got rich and all that.Travels from nothing, what more do you need?</p><p>When he later had to return the Amstrad, he couldn`t find a version of the game for his MSX. He decided to her make it yourself. No pictures, just letters, as he was completely inexperienced with them. Of course, with MSX`s built-in QBASIC, displaying letters would be a problem too.</p><p>This, however, was his first serious contact with programming.</p><div class="timeline-gallery"><figure><img src="../Client/Images/Standard/Timeline/Taipan.jpg?ver=1" class="viewable" alt="TAIPAN"><figcaption>The TAIPAN in Amstrad. You dont want to see the version in MSX.</figcaption></figure></div>',
+				}
+			},
+		]
+	});
+
+	timeline.draw();
+
+
