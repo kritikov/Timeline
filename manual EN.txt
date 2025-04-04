@@ -36,10 +36,16 @@ setUpperTitle(title): modifies the general title of events above the timelines
 
 setLowerTitle(title): modifies the general title of events below the timelines
 
+setType(type): sets the timeline type. There are three predefined styles: default, culture, bubbles.
+
+setCustomClass(className): adds a custom css class to the timeline for additional formatting. If a type is selected then the
+	formatting will be added to that of the type. For full custom formatting we select setType('') ​​and then set the desired custom css class.
+
 addMilestone(milestone): adds a new milestone to the chart. The milestone is of the form:
 
 	milestone = {
 		title: "<value>",
+		customClass: "<value>",
 		events: [
 			{
 				text: "<value>",
@@ -63,6 +69,7 @@ addMilestone(milestone): adds a new milestone to the chart. The milestone is of 
 	title: the text that appears in the timeline.
 	events: the list of events contained within the timeline. Each timeline can contain an unlimited number of events and its length will be adjusted accordingly.
 		text: the text of the event.
+		customClass: a custom class by the user to give more css formatting to the specific timeline
 		place: whether the event appears above or below the timeline line (allowed values ​​'up' or 'down')
 		distance: is optional and concerns the distance in pixels of the event from the timeline. If no value is given then it will be at the default distance defined by the css.
 		customClass: a custom class by the user to give more css formatting to the specific event
@@ -81,6 +88,7 @@ Usage example
 
 	timeline.setUpperTitle("about professional");
 	timeline.setLowerTitle("about creativity");
+	timeline.setType("default");
 
 	timeline.addMilestone({
 		title: "1973",

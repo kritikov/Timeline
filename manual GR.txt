@@ -36,10 +36,16 @@ setUpperTitle(title): τροποποιεί τον γενικό τίτλο των event που βρίσκονται επάνω
 
 setLowerTitle(title): τροποποιεί τον γενικό τίτλο των event που βρίσκονται κάτω από τα timelines
 
+setType(type): ορίζει τον τύπο του timeline. Υπάρχουν τις τρεις προσχεδιασμένες μορφές: default, culture, bubbles.
+
+setCustomClass(className): προσθέτει μία custom css class στο timeline για επιπρόσθετη μορφοποίηση. Αν έχει επιλεγεί ένας τύπος τότε η 
+	μορφοποίηση θα προστεθεί σε αυτήν του τύπου. Για πλήρη custom μορφοποίηση επιλέγουμε setType('') και μετά ορίζουμε την επιθυμητή custom css class.
+
 addMilestone(milestone): προσθέτει ένα καινούργιο milestone στο γράφημα. Το milestone είναι της μορφής:
 
 	milestone = {
 		title: "<value>",
+		customClass: "<value>",
 		events: [
 			{
 				text: "<value>", 
@@ -63,6 +69,7 @@ addMilestone(milestone): προσθέτει ένα καινούργιο milestone στο γράφημα. Το mile
 	title: το κείμενο που εμφανίζεται μέσα στο timeline. 
 	events: η λίστα με τα events που περιέχονται μέσα στο timeline. Κάθε timeline μπορεί να περιέχει απεριόριστα events και το μήκος του θα προσαρμοστεί αναλόγως.
 		text: το κείμενο του event. 
+		customClass: μια custom class από τον χρήστη ώστε να δοθούν περισσότερες μορφοποιήσεις css στο συγκεκριμένο timeline
 		place: αν το event εμφανιστεί επάνω ή κάτω από την γραμμή των timelines (επιτρεπόμενες τιμές 'up' ή 'down') 
 		distance: είναι προαιρετικό και αφορά την απόσταση σε pixels του event από το timeline. Αν δεν δοθεί τιμή τότε θα απέχει την default απόσταση που ορίζεται από την css.
 		customClass: μια custom class από τον χρήστη ώστε να δοθούν περισσότερες μορφοποιήσεις css στο συγκεκριμένο event
@@ -81,6 +88,7 @@ addMilestone(milestone): προσθέτει ένα καινούργιο milestone στο γράφημα. Το mile
 
 	timeline.setUpperTitle("about professional");
 	timeline.setLowerTitle("about creativity");
+	timeline.setType("default");
 
 	timeline.addMilestone({
 		title: "1973",

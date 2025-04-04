@@ -5,8 +5,11 @@ class Timeline {
 
 	#canvas;
 	#contents = {
-		upperTitle: "upper title",
-		lowerTitle: "lower title",
+		upperTitle: "",
+		lowerTitle: "",
+		type: "default",
+		typeClass: "tl-type-default",
+		customClass: "",
 		milestones: []
 	};
 
@@ -52,6 +55,32 @@ class Timeline {
 		this.#contents.lowerTitle = title;
 	}
 
+	// set custom class
+	setCustomClass(className) {
+		this.#contents.customClass = className;
+	}
+
+	// set the type of the timeline
+	setType(type) {
+
+		if (type == "default") {
+			this.#contents.typeClass = "tl-type-default";
+			this.#contents.type = type;
+		}
+		else if (type == "culture") {
+			this.#contents.typeClass = "tl-type-culture";
+			this.#contents.type = type;
+		}
+		else if (type == "bubbles") {
+			this.#contents.typeClass = "tl-type-bubbles";
+			this.#contents.type = type;
+		}
+		else {
+			this.#contents.typeClass = "";
+			this.#contents.type = "";
+		}
+	}
+
 
 	///// PRIVATE METHODS
 
@@ -88,8 +117,9 @@ class Timeline {
 
 	// get the contents of the timeline as HTML
 	#contentsHTML() {
-		let html = "";
-		html = `<table class='tl-contents'>`;
+		let html = ``;
+
+		html = `<table class='tl-contents ${this.#contents.typeClass} ${this.#contents.customClass}'>`;
 		html += `	<tbody>`;
 		html += this.#milestonesHTML();
 		html += `	</tbody>`;
@@ -103,14 +133,12 @@ class Timeline {
 		let html = ``;
 
 		// periods
-		html += `<tr>`;
-		if (this.#contents.upperTitle || this.#contents.lowerTitle) {
-			html += `<td></td>`;
-		}
+		html += `<tr class="tl-periods">`;
+		html += `	<td></td>`; // same column with titles
 		let milestonePosition = 0;
 		for (let milestone of this.#contents.milestones) {
 			if (milestone.period) {
-				html += `<td class="tl-period" colspan="${milestone.period.milestones}"><div>${milestone.period.text}</div></td>`;
+				html += `<td class="tl-period" colspan="${milestone.period.milestones}"><div class="tl-period-contents">${milestone.period.text}</div></td>`;
 				milestonePosition = milestone.period.milestones - 1;
 			}
 			else if (milestonePosition > 0) {
@@ -124,12 +152,11 @@ class Timeline {
 
 
 		// upper events
-		html += `<tr>`;
-		if (this.#contents.upperTitle) {
-			html += `<td class="tl-upperTitle"><div>${this.#contents.upperTitle}</div></td>`;
-		}
+		let upperTitle = this.#contents.upperTitle ?? "";
+		html += `<tr class="tl-upperEvents">`;
+		html += `	<td class="tl-upperTitle"><div class="tl-upperTitle-contents">${upperTitle}</div></td>`;
 		for (let milestone of this.#contents.milestones) {
-			html += `<td><div class="tl-upperEvents">`;
+			html += `<td class="tl-milestone-upperEvents"><div class="tl-milestone-upperEvents-contents">`;
 			if (milestone.events) {
 				for (let event of milestone.events) {
 					if (event.place === "up")
@@ -143,22 +170,20 @@ class Timeline {
 
 		// milestones
 		html += `<tr class="tl-milestones">`;
-		if (this.#contents.upperTitle || this.#contents.lowerTitle) {
-			html += `<td></td>`;
-		}
+		html += `	<td></td>`;	 // same column with titles
 		for (let milestone of this.#contents.milestones) {
-			html += `<td><div class="tl-milestone">${milestone.title}</div></td>`;
+			let customClass = milestone.customClass ?? '';
+			html += `<td class="tl-milestone"><div class="tl-milestone-contents ${customClass}">${milestone.title}</div></td>`;
 		}
 		html += `</tr>`;
 
 
 		// lower events
-		html += `<tr>`;
-		if (this.#contents.lowerTitle) {
-			html += `<td class="tl-lowerTitle"><div>${this.#contents.lowerTitle}</div></td>`;
-		}
+		let lowerTitle = this.#contents.lowerTitle ?? "";
+		html += `<tr class="tl-lowerEvents">`;
+		html += `	<td class="tl-lowerTitle"><div class="tl-lowerTitle-contents">${lowerTitle}</div></td>`;
 		for (let milestone of this.#contents.milestones) {
-			html += `<td><div class="tl-lowerEvents">`;
+			html += `<td class="tl-milestone-lowerEvents"><div class="tl-milestone-lowerEvents-contents">`;
 			if (milestone.events) {
 				for (let event of milestone.events) {
 					if (event.place === "down")
@@ -199,17 +224,17 @@ class Timeline {
 	// get the contents of an event as HTML
 	#eventHTML(event) {
 		let html = ``;
-		let extraClass = ``, details = '';
+		let customClass = event.customClass ?? '';
+		let details = '';
 
 		if (event.details) {
-			extraClass = ` tl-event-withDetails`;
+			customClass = ` tl-event-withDetails`;
 			details = this.#eventDetailsHTML(event.details);
 		}
 
-		if (event.customClass)
-			extraClass += ` ${event.customClass}`;
-
-		html += `<div class="tl-event ${extraClass}">`;
+		html += `<div class="tl-event ${customClass}">`;
+		if (event.title)
+			html += `	<div class="tl-event-title">${event.title}</div>`;
 		html += `	<div class="tl-event-text">${event.text}</div>`;
 		html += details;
 		html += `</div>`;

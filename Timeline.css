@@ -1,26 +1,23 @@
 
 .tl-canvas {
     min-width: 90%;
-    background-image: linear-gradient(#EBEEF1, #C7CED6);
     border: 1px solid #C66300;
     overflow: auto;
-    padding: 10px;
-    font-size: 13px;
+    padding: 0;
 }
 
 .tl-contents {
     border-collapse: collapse;
     width: auto;
     table-layout: fixed;
+    font-size: 13px;
 }
 
 
 /**************** periods ****************/
 
-.tl-period > div {
+.tl-period-contents {
     text-align: center;
-    border-bottom: 1px solid #008040;
-    color: #373D4D;
     padding: 5px;
     margin: 5px 10px 25px 10px;
 }
@@ -28,53 +25,44 @@
 
 /**************** milestones ****************/
 
-.tl-milestone {
-    background-color: #57728F;
+.tl-milestone-contents {
+    background-color: lightgray;
     text-align: center;
-    color: white;
-    border-left: 1px solid white;
-    padding: 5px 25px 5px 25px;
-    min-width: 100px;
-}
-.tl-milestones > td:nth-child(even) .tl-milestone {
-    background-color: #7E93A9;
+    padding: 10px;
+    border: 1px solid white;
 }
 
 
 /**************** titles ****************/
 
 .tl-upperTitle {
-    color: #BB0000;
-    text-shadow: 5px 5px 10px gray;
     word-wrap: break-word;
     white-space: normal;
-    font-size: 20px;
+    font-size: 1.2em;
     vertical-align: bottom;
+    color: darkblue;
 }
-.tl-upperTitle>div{
-    width: 180px;
-    text-align: right;
-    padding: 0 40px 40px 0;
+.tl-upperTitle-contents {
+    max-width: 180px;
+    padding: 10px 40px 40px 10px;
 }
 .tl-lowerTitle {
-    color: #BB0000;
-    text-shadow: 5px 5px 10px gray;
     word-wrap: break-word;
     white-space: normal;
-    font-size: 20px;
+    font-size: 1.2em;
     vertical-align: top;
+    color: darkblue;
 }
-.tl-lowerTitle>div {
-    width: 180px;
-    text-align: right;
-    padding: 40px 40px 0 0;
+.tl-lowerTitle-contents {
+    max-width: 180px;
+    padding: 40px 40px 10px 10px;
 }
 
 
 /**************** upper/lower events ****************/
 
-.tl-upperEvents,
-.tl-lowerEvents {
+.tl-milestone-upperEvents-contents,
+.tl-milestone-lowerEvents-contents {
     text-align: center;
     white-space: nowrap;
     overflow: visible;
@@ -89,22 +77,22 @@
 }
 .tl-upperEvent {
     vertical-align: bottom;
+    margin-top: 10px;
 }
 .tl-lowerEvent {
     vertical-align: top;
+    margin-bottom: 10px;
 }
 
 
 /**************** events ****************/
 
 .tl-event {
-    padding: 5px 10px 5px 10px;
-    background-color: #F4F4F4;
+    padding: 5px;
+    background-color: white;
     color: black;
     text-align: left;
     border: 1px solid #8B8B8B;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px #4A4A4A;
     word-wrap: normal;
     white-space: normal;
     line-height: 1.3em;
@@ -125,6 +113,15 @@
 .tl-event-details-text p {
     padding: 5px;
 }
+.tl-event-title {
+    padding: 2px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    border-bottom: 2px solid black;
+}
+.tl-event-text {
+
+}
 
 
 /**************** connection lines ****************/
@@ -133,7 +130,7 @@
     width: 1px;
     height: 40px;
     padding: 0;
-    border-left: 1px solid #C66300;
+    border-left: 1px solid darkgray;
     display: inline-block;
 }
 
@@ -190,6 +187,182 @@
     display: none;
 }
 
+
+/**************** variations ****************/
+
+/*** default ***/
+
+.tl-type-default {
+    background-image: linear-gradient(#EBEEF1, #C7CED6);
+}
+
+.tl-type-default .tl-period-contents {
+    text-align: center;
+    border-bottom: 1px solid #008040;
+    color: #373D4D;
+}
+.tl-type-default .tl-milestone-contents {
+    background-color: #57728F;
+    text-align: center;
+    color: white;
+    border: none;
+    border-left: 1px solid white;
+    padding: 5px 25px 5px 25px;
+    min-width: 100px;
+}
+.tl-type-default .tl-milestones > .tl-milestone:nth-child(even) > .tl-milestone-contents {
+    background-color: #7E93A9;
+}
+.tl-type-default .tl-event {
+    padding: 5px 10px 5px 10px;
+    background-color: #F4F4F4;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #4A4A4A;
+    line-height: 1.3em;
+    max-width: 150px;
+}
+.tl-type-default .tl-event-withDetails {
+    background-color: #FAFFEC;
+}
+.tl-type-default .tl-event-withDetails:hover {
+    background-color: #FFCD9B;
+}
+.tl-type-default .tl-upperTitle {
+    color: #BB0000;
+    text-shadow: 5px 5px 10px gray;
+    font-size: 1.5em;
+    vertical-align: bottom;
+}
+.tl-type-default .tl-upperTitle-contents {
+    text-align: right;
+}
+.tl-type-default .tl-lowerTitle {
+    color: #BB0000;
+    text-shadow: 5px 5px 10px gray;
+    font-size: 1.5em;
+    vertical-align: top;
+}
+.tl-type-default .tl-lowerTitle-contents {
+    text-align: right;
+}
+.tl-type-default .tl-eventConnectionLine {
+    width: 1px;
+    height: 40px;
+    border-left: 1px solid #C66300;
+}
+
+
+/*** culture ***/
+
+.tl-type-culture {
+    background-image: linear-gradient(#FFEAE8, #BDCCB4);
+}
+.tl-type-culture .tl-upperTitle {
+    color: blue;
+    font-size: 16px;
+}
+.tl-type-culture .tl-lowerTitle {
+    color: saddlebrown;
+    font-size: 16px;
+}
+.tl-type-culture .tl-period-contents {
+    font-weight: 600;
+    border-bottom: 4px double red;
+}
+.tl-type-culture {
+    background-image: linear-gradient(#FFEAE8, #BDCCB4);
+}
+.tl-type-culture .tl-event {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #8B8B8B;
+    line-height: 1.3em;
+}
+.tl-type-culture .tl-upperEvent .tl-event {
+    background-color: #e1f2f0;
+    border-radius: 25px;
+    font-style: italic;
+}
+.tl-type-culture .tl-lowerEvent .tl-event {
+    background-color: #e9c43b;
+    border-radius: 0px;
+}
+.tl-type-culture .tl-lowerEvent:nth-child(even) .tl-event {
+    background-color: #43c3d0;
+}
+.tl-type-culture .tl-lowerEvent:nth-child(even) .tl-event-withDetails,
+.tl-type-culture .tl-upperEvent .tl-event-withDetails,
+.tl-type-culture .tl-lowerEvent .tl-event-withDetails {
+    background-color: #FAFFEC;
+}
+.tl-type-culture .tl-upperEvent .tl-event-withDetails:hover,
+.tl-type-culture .tl-lowerEvent .tl-event-withDetails:hover,
+.tl-type-culture .tl-lowerEvent:nth-child(even) .tl-event-withDetails:hover {
+    background-color: #FFCD9B;
+}
+.tl-type-culture .tl-eventConnectionLine {
+    border-left: 4px dashed green;
+}
+
+
+/*** cycles ***/
+
+.tl-type-bubbles {
+    background-color: #f0f5f9;
+}
+.tl-type-bubbles .tl-event{
+    text-align: center;
+}
+.tl-type-bubbles .tl-upperEvents td:nth-child(even) .tl-event,
+.tl-type-bubbles .tl-lowerEvents td:nth-child(odd) .tl-event {
+    border-radius: 50%;
+    border: 2px solid red;
+    padding: 20px;
+    font-size: 1.5em;
+    box-shadow: 1px 1px 5px #4A4A4A;
+}
+.tl-type-bubbles .tl-upperEvents td:nth-child(odd) .tl-event,
+.tl-type-bubbles .tl-lowerEvents td:nth-child(even) .tl-event {
+    border-radius: unset;
+    border: none;
+    box-shadow: none;
+    background-color: inherit;
+}
+.tl-type-bubbles .tl-upperEvents td:nth-child(odd) .tl-event-withDetails,
+.tl-type-bubbles .tl-lowerEvents td:nth-child(even) .tl-event-withDetails {
+    color: darkslateblue;
+}
+.tl-type-bubbles .tl-upperEvents td:nth-child(odd) .tl-event-withDetails:hover,
+.tl-type-bubbles .tl-lowerEvents td:nth-child(even) .tl-event-withDetails:hover {
+    color: darkcyan;
+}
+.tl-type-bubbles .tl-upperEvents td:nth-child(odd) .tl-eventConnectionLine,
+.tl-type-bubbles .tl-lowerEvents td:nth-child(even) .tl-eventConnectionLine {
+    width: 0px;
+    border: none;
+    height: 0px;
+}
+.tl-type-bubbles .tl-milestones {
+    background: linear-gradient(to right, orange, green);
+}
+.tl-type-bubbles .tl-milestones>td:first-child {
+    background-color: #f0f5f9;
+}
+.tl-type-bubbles .tl-milestone-contents {
+    background-color: inherit;
+}
+.tl-type-bubbles .tl-milestones > .tl-milestone:nth-child(even) > .tl-milestone-contents{
+    background-color: inherit;
+}
+.tl-type-bubbles .tl-eventConnectionLine {
+    width: 2px;
+    border-left: 2px solid red;
+}
+.tl-type-bubbles .tl-event-title {
+    border-bottom: 2px solid green;
+}
+ 
 
 
 
