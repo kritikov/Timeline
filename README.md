@@ -6,4 +6,4 @@ they belong to the same period.
 
 The Timeline includes two files, one in javascript and one in css. For more informations read the included manual.
 
-You can view samples of it at https://nkode.gr/EN/articleView?id=273
+You can view samples at https://nkode.gr/EN/articleView?id=273
