@@ -5,3 +5,5 @@ There is also the periods line that is placed at the top of the graph, and in wh
 they belong to the same period.
 
 The Timeline includes two files, one in javascript and one in css. For more informations read the included manual.
+
+You can view samples of it at https://nkode.gr/EN/articleView?id=273
