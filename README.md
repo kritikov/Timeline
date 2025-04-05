@@ -4,9 +4,4 @@ belonging to each of them are placed. The timelines are placed sequentially, and
 There is also the periods line that is placed at the top of the graph, and in which each period spreads over a number of consecutive timelines showing that 
 they belong to the same period.
 
-
-Usage
-
-The Timeline includes two files, one in javascript and one in css. The javascript includes the Timeline class and its use is done by declaring an
-instance, passing as a parameter the div in which the editor or viewer will be created. The class uses the tl- prefix to declare the various
-css classes included in the corresponding file.
+The Timeline includes two files, one in javascript and one in css. For more informations read the included manual.
